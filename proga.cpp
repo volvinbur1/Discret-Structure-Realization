@@ -1,7 +1,6 @@
-#include "pch.h"
 #include <iostream>
 #include <fstream>
-#include <ctime>;
+#include <ctime>
 
 int main()
 {
