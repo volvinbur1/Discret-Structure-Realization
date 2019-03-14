@@ -82,8 +82,9 @@ void fillTable(int _amountOfRows)
 				break;
 			}
 		}
-
-		bookInfo << endl;
+		
+		if (i != _amountOfRows - 1)
+			bookInfo << endl;
 		printf_s("|\n");
 	}
 
