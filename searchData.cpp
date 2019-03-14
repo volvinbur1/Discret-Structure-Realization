@@ -1,12 +1,13 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
-	int book_data_array[10000][4], index = 0;
+	int book_data_array[50000][4], index = 0;
 	ifstream data;
 
 	data.open("E:\\Program\\Discrete structures\\BookData\\BookData\\bookInfo.txt");
@@ -60,6 +61,8 @@ int main()
 
 	printf("\n|_ProductNumber_|___BookName____|____Author_____|__Publishing_Year__|\n");
 
+	clock_t startTime = clock();
+
 	for (int i = 0; i <= index; i++)
 		if (book_data_array[i][search_colom - 1] == search_line) // checking search equation
 		{
@@ -69,8 +72,10 @@ int main()
 
 	if (!is_something_found)
 	{
-		printf("According to input info no data found.");
+		printf("\nAccording to input info no data found.\n");
 	}
+
+	printf_s("\nThe code was running for %.2fs\n", (double)(clock() - startTime) / CLOCKS_PER_SEC);
 
 	system("Pause");
 }
