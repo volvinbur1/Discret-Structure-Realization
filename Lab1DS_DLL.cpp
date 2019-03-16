@@ -1,6 +1,8 @@
 //Doubly linked list
 #include <iostream>
 #include <ctime>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -118,7 +120,20 @@ int main()
 	DLlist->next = NULL;
 	DLlist->prev = NULL;
 
+	fstream file;
+
+	file.open("DLL_data.txt");
+	
 	clock_t startTime = clock();
+
+	while (!file.eof())
+	{
+		string data;
+		getline(file, data);
+		insertToEnd(stoi(data), &DLlist);
+	}
+
+	file.close();
 
 	/*for (int i = 1; i <= 5; i++)
 	{
