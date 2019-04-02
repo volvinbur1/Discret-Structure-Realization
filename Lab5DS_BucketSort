@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <fstream>
+#include <vector>
 #include <string>
 #include <ctime>
 
@@ -8,14 +9,14 @@
 
 using namespace std;
 
-void bucket_sort(int _arr[], int _devider, uint32_t _size);
+void bucket_sort(vector<int> &_arr, int _devider, size_t _size);
 void insertation_sort(queue<int> &q);
 
 int main()
 {
-	int* arr = new int();// = { 9, 6, 8, 3, 5, 1 };
-
-	uint32_t arr_size = 0;//= sizeof(arr) / sizeof(arr[0]);
+	vector<int> arr;// = { 9, 6, 8, 3, 5, 1 };
+;
+	size_t arr_size;//= sizeof(arr) / sizeof(arr[0]);
 
 	std::fstream file;
 
@@ -25,21 +26,23 @@ int main()
 	{
 		std::string data;
 		getline(file, data);
-		arr[arr_size] = stoi(data);
-		arr_size++;
+		arr.push_back(stoi(data));
+		//arr_size++;
 	}
+
+	arr_size = arr.size();
 
 	file.close();
 
 	int max = INT32_MIN;
 
-	for (int i = 0; i < arr_size; i++)
+	for (size_t i = 0; i < arr_size; i++)
 		if (arr[i] > max)
 			max = arr[i];
 
 	clock_t start_time = clock();
 
-	bucket_sort(arr, ceil((max+1) / BUCKET_AMOUNT), arr_size);
+	bucket_sort(arr, (int)ceil((max+1) / BUCKET_AMOUNT), arr_size);
 
 	double run_time = (clock() - start_time) / CLOCKS_PER_SEC;
 
@@ -47,15 +50,14 @@ int main()
 		printf("%d\t", arr[i]);
 
 	printf("\nAn array was sorted for %.2fs\n", run_time);
-
 	system("Pause");
 }
 
-void bucket_sort(int _arr[], int _devider, uint32_t _size)
+void bucket_sort(vector<int> &_arr, int _devider, size_t _size)
 {
 	queue<int> buckets[BUCKET_AMOUNT];
 
-	for (int i = 0; i < _size; i++)
+	for (size_t i = 0; i < _size; i++)
 		buckets[_arr[i] / _devider].push(_arr[i]);
 
 	int indexator = 0;
@@ -74,7 +76,7 @@ void bucket_sort(int _arr[], int _devider, uint32_t _size)
 
 void insertation_sort(queue<int> &q)
 {
-	const int n = q.size();
+	const int n = (int)q.size();
 	
 	if (n > 1)
 	{
